@@ -8,19 +8,32 @@
 import SwiftUI
 
 struct BreakTimeView: View {
+    
+    @State public var breakMode: Float = 10.0
+    
     var body: some View {
         GroupBox {
             VStack(alignment: .leading) {
                 Text("Set your break time")
                     .padding()
-                Text("Idk")
-                    .padding()
-                
-                Text("Idk")
-                    .padding()
-                
-                Text("Idk")
-                    .padding()
+                    .font(.title)
+                Text("Your break time: \(Int(breakMode))")
+                    .padding(.horizontal)
+                    .font(.title3)
+                Slider(value: $breakMode,
+                       in: 5...45,
+                       step: 5)
+                {
+                    Text("Break time")
+                } minimumValueLabel: {
+                    Text("5")
+                        .font(.callout)
+                } maximumValueLabel: {
+                    Text("45")
+                        .font(.callout)
+
+                }
+                .padding()
                 
             }
         }
