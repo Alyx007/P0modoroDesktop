@@ -9,17 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        HStack(spacing: 200) {
-            VStack(spacing: 8) {
-                WorkTimeView()
-                    .padding(.horizontal, 8)
-                BreakTimeView()
-                    .padding(.horizontal, 8)
+        ZStack {
+        Image("tom")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .edgesIgnoringSafeArea(.all)
+        
+        
+            HStack(spacing: 200) {
+                
+                VStack(spacing: 8) {
+                    WorkTimeView()
+                        .padding(.horizontal, 8)
+                    BreakTimeView()
+                        .padding(.horizontal, 8)
                     
+                }
+                
+                
+                TimerView()
             }
-            
-            
-            TimerView()
         }
     }
 }
