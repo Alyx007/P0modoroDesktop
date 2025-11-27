@@ -31,7 +31,7 @@ struct TimerView: View {
                 displayedComponents: [.hourAndMinute]
             )
             .padding()
-            .datePickerStyle(.graphical)
+            .datePickerStyle(.automatic)
             .labelsHidden()
             
         }
