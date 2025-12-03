@@ -9,18 +9,18 @@ import SwiftUI
 
 struct BreakTimeView: View {
     
-    @State public var breakMode: Float = 10.0
-    
+    @EnvironmentObject var settings: PomodoroTimer
+
     var body: some View {
         GroupBox {
             VStack(alignment: .leading) {
                 Text("Set your break time")
                     .padding()
                     .font(.title)
-                Text("Your break time: \(Int(breakMode))")
+                Text("Your break time: \(Int(settings.breakTime)))")
                     .padding(.horizontal)
                     .font(.title3)
-                Slider(value: $breakMode,
+                Slider(value: $settings.breakTime,
                        in: 5...45,
                        step: 5)
                 {
@@ -42,4 +42,5 @@ struct BreakTimeView: View {
 
 #Preview {
     BreakTimeView()
+        .environmentObject(PomodoroTimer())
 }

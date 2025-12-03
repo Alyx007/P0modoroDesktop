@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct P0modoroApp: App {
+    
+    @StateObject var settings = PomodoroTimer()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(settings)
         }
     }
 }
