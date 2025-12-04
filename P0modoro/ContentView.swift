@@ -15,8 +15,7 @@ struct ContentView: View {
             .aspectRatio(contentMode: .fill)
             .edgesIgnoringSafeArea(.all)
         
-        
-            HStack(spacing: 200) {
+            HStack() {
                 
                 VStack(spacing: 8) {
                     WorkTimeView()
@@ -25,8 +24,6 @@ struct ContentView: View {
                         .padding(.horizontal, 8)
                     
                 }
-                
-                
                 TimerView()
             }
         }

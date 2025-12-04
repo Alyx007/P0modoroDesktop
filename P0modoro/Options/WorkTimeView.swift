@@ -16,10 +16,11 @@ struct WorkTimeView: View {
             VStack(alignment: .leading) {
                 Text("Set your work time")
                     .padding()
-                    .font(.title)
+                    .font(.system(size: 30, weight: .bold, design: .rounded))
                 Text("Your work time: \(Int(settings.workTime))")
                     .padding(.horizontal)
-                    .font(.title3)
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                
                 Slider(value: $settings.workTime,
                        in: 20...60,
                        step: 5)
@@ -31,7 +32,7 @@ struct WorkTimeView: View {
                 } maximumValueLabel: {
                     Text("60")
                         .font(.callout)
-
+                    
                 }
                 .padding()
                 

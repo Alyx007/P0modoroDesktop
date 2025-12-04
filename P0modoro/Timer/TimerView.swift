@@ -9,34 +9,47 @@ import SwiftUI
 
 struct TimerView: View {
     
-    @State private var time = Date()
-    let timeRange: ClosedRange<Date> = {
-        let calendar = Calendar.current
-        let startComponents = DateComponents(hour: 0, minute: 20, second: 0)
-        let endComponents = DateComponents(hour: 23, minute: 59, second: 59)
-        return calendar.date(from:startComponents)!
-        ...
-        calendar.date(from:endComponents)!
-    }()
+    @State private var minutes = 25
     
     var body: some View {
-        VStack {
-            Text("Set your time")
-                .padding(.horizontal)
-            
-            DatePicker(
-                "",
-                selection: $time,
-                in: timeRange,
-                displayedComponents: [.hourAndMinute]
-            )
+        GroupBox {
+            VStack() {
+                Text("Pomodoro Timer")
+                    .font(.largeTitle)
+                    .padding(.top)
+                
+                Text("\(minutes) min")
+                    .font(.system(size: 48, weight: .bold, design: .rounded))
+                    .foregroundStyle(.primary)
+                    .padding(.bottom, 10)
+                
+                HStack(spacing: 20) {
+                    Button("-", action: {
+                        if minutes > 5 { minutes -= 5 }
+                    })
+                    .buttonStyle(.bordered)
+                    
+                    Button("+", action: {
+                        if minutes < 60 { minutes += 5 }
+                    })
+                    .buttonStyle(.bordered)
+                }
+                
+                HStack() {
+                    Button("Start") { print("Start timer") }
+                        .buttonStyle(.borderedProminent)
+                    
+                    Button("Reset") { minutes = 25 }
+                        .buttonStyle(.bordered)
+                }
+                
+            }
             .padding()
-            .datePickerStyle(.automatic)
-            .labelsHidden()
-            
+            .frame(minWidth: 250, minHeight: 250)
         }
     }
 }
+
 
 #Preview {
     TimerView()
