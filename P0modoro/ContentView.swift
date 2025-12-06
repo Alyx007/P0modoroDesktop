@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-        Image("tom0")
+        Image("tom")
             .resizable()
             .aspectRatio(contentMode: .fill)
             .edgesIgnoringSafeArea(.all)
@@ -24,7 +24,10 @@ struct ContentView: View {
                         .padding(.horizontal, 8)
                     
                 }
-                TimerView()
+                VStack {
+                    PersonalizationView()
+                    TimerView()
+                }
             }
         }
     }

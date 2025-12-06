@@ -23,26 +23,6 @@ struct TimerView: View {
                     .foregroundStyle(.primary)
                     .padding(.bottom, 10)
                 
-                HStack(spacing: 20) {
-                    Button("-", action: {
-                        if minutes > 5 { minutes -= 5 }
-                    })
-                    .buttonStyle(.bordered)
-                    
-                    Button("+", action: {
-                        if minutes < 60 { minutes += 5 }
-                    })
-                    .buttonStyle(.bordered)
-                }
-                
-                HStack() {
-                    Button("Start") { print("Start timer") }
-                        .buttonStyle(.borderedProminent)
-                    
-                    Button("Reset") { minutes = 25 }
-                        .buttonStyle(.bordered)
-                }
-                
             }
             .padding()
             .frame(minWidth: 250, minHeight: 250)

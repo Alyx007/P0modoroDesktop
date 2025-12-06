@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct PersonalizationView: View {
+    
+    @State var ispressed: Bool = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GroupBox {
+            HStack {
+                Text("Personalization Options")
+                    .padding()
+                Image(systemName: "gearshape.fill")
+                    .scaleEffect(0.95)
+                
+//                Button(action: {
+//                    print("Delete tapped!")
+//                })
+                
+                
+            }
+        }
     }
 }
 
