@@ -10,12 +10,12 @@ import SwiftUI
 @main
 struct P0modoroApp: App {
     
-    @StateObject var settings = PomodoroTimer()
+    @StateObject var timer = PomodoroTimer()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(settings)
+                .environmentObject(timer)
         }
     }
 }

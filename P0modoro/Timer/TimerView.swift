@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TimerView: View {
     
-    @State private var minutes = 25
-    
+    @EnvironmentObject var timer: PomodoroTimer
+
     var body: some View {
         GroupBox {
             VStack() {
@@ -18,19 +18,31 @@ struct TimerView: View {
                     .font(.largeTitle)
                     .padding(.top)
                 
-                Text("\(minutes) min")
+                Text("\(Int(timer.workTime)) minutes")
                     .font(.system(size: 48, weight: .bold, design: .rounded))
                     .foregroundStyle(.primary)
                     .padding(.bottom, 10)
+                
+                Button("Start") {
+                                startTimer()
+                            }
                 
             }
             .padding()
             .frame(minWidth: 250, minHeight: 250)
         }
+        
+        
     }
+    
+    func startTimer() {
+            print("Starting timer for \(timer.workTime) minutes!")
+            //  countdown logic
+        }
 }
 
 
 #Preview {
     TimerView()
+        .environmentObject(PomodoroTimer())
 }

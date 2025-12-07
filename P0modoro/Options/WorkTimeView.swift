@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WorkTimeView: View {
     
-    @EnvironmentObject var settings: PomodoroTimer
+    @EnvironmentObject var timer: PomodoroTimer
     
     var body: some View {
         GroupBox {
@@ -17,11 +17,11 @@ struct WorkTimeView: View {
                 Text("Set your work time")
                     .padding()
                     .font(.system(size: 30, weight: .bold, design: .rounded))
-                Text("Your work time: \(Int(settings.workTime))")
+                Text("Your work time: \(Int(timer.workTime))")
                     .padding(.horizontal)
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                 
-                Slider(value: $settings.workTime,
+                Slider(value: $timer.workTime,
                        in: 20...60,
                        step: 5)
                 {
