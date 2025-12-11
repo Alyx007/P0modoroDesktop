@@ -16,10 +16,10 @@ struct BreakTimeView: View {
             VStack(alignment: .leading) {
                 Text("Set your break time")
                     .padding()
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
                 Text("Your break time: \(Int(timer.breakTime))")
                     .padding(.horizontal)
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
                 Slider(value: $timer.breakTime,
                        in: 5...45,
                        step: 5)

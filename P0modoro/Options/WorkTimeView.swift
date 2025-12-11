@@ -16,10 +16,10 @@ struct WorkTimeView: View {
             VStack(alignment: .leading) {
                 Text("Set your work time")
                     .padding()
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
+                    .font(.system(size: 20, weight: .bold, design: .rounded))
                 Text("Your work time: \(Int(timer.workTime))")
                     .padding(.horizontal)
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
                 
                 Slider(value: $timer.workTime,
                        in: 20...60,
