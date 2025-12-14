@@ -18,12 +18,7 @@ struct PersonalizationView: View {
                     .padding()
                 Image(systemName: "gearshape.fill")
                     .scaleEffect(0.95)
-                
-//                Button(action: {
-//                    print("Delete tapped!")
-//                })
-                
-                
+
             }
         }
     }
