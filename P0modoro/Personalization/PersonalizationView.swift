@@ -13,12 +13,16 @@ struct PersonalizationView: View {
     
     var body: some View {
         GroupBox {
-            HStack {
-                Text("Personalization Options")
-                    .padding()
-                Image(systemName: "gearshape.fill")
-                    .scaleEffect(0.95)
-
+            NavigationStack {
+                NavigationLink(destination: SettingsView()) {
+                    HStack {
+                        Text("Personalization Options")
+                            .padding()
+                        Image(systemName: "gearshape.fill")
+                            .scaleEffect(0.95)
+                        
+                    }
+                }
             }
         }
     }

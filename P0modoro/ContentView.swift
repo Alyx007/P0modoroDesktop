@@ -26,6 +26,7 @@ struct ContentView: View {
                 }
                 VStack {
                     PersonalizationView()
+                        .fixedSize()
                     TimerView()
                 }
             }
