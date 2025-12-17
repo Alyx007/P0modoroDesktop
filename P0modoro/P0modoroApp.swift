@@ -17,5 +17,11 @@ struct P0modoroApp: App {
             ContentView()
                 .environmentObject(timer)
         }
+        
+        WindowGroup("Personalization", id: "settings-window") {
+            SettingsView()
+                .environmentObject(timer)
+                .frame(minWidth: 400, minHeight: 300)
+        }
     }
 }

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var timer: PomodoroTimer
+    
     var body: some View {
         ZStack {
         Image("tom")

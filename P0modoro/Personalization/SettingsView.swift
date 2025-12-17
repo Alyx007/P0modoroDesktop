@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @EnvironmentObject var timer: PomodoroTimer
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            AppearanceView()
+        }
     }
 }
+
 
 #Preview {
     SettingsView()
