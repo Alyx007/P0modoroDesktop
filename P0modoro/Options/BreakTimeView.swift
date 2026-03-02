@@ -34,9 +34,11 @@ struct BreakTimeView: View {
 
                 }
                 .padding()
-                
+
             }
         }
+        .disabled(timer.phase != .idle)
+        .opacity(timer.phase != .idle ? 0.5 : 1.0)
     }
 }
 

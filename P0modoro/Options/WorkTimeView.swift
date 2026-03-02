@@ -20,7 +20,7 @@ struct WorkTimeView: View {
                 Text("Your work time: \(Int(timer.workTime))")
                     .padding(.horizontal)
                     .font(.system(size: 15, weight: .bold, design: .rounded))
-                
+
                 Slider(value: $timer.workTime,
                        in: 20...60,
                        step: 5)
@@ -32,12 +32,14 @@ struct WorkTimeView: View {
                 } maximumValueLabel: {
                     Text("60")
                         .font(.callout)
-                    
+
                 }
                 .padding()
-                
+
             }
         }
+        .disabled(timer.phase != .idle)
+        .opacity(timer.phase != .idle ? 0.5 : 1.0)
     }
 }
 

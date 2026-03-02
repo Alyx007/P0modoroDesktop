@@ -11,18 +11,17 @@ struct AppearanceView: View {
     
     @EnvironmentObject var timer: PomodoroTimer
         
-        let fontOptions = ["Standard", "Rounded", "Monospaced", "Serif"]
-        
         var body: some View {
             Form {
                 Section(header: Text("Personalizacja Interfejsu").font(.headline)) {
-                    
+
                     ColorPicker("Kolor główny licznika", selection: $timer.accentColor)
-                    
+
                     Picker("Styl czcionki", selection: $timer.selectedFont) {
-                        ForEach(fontOptions, id: \.self) { font in
-                            Text(font).tag(font)
-                        }
+                        Text("Standard").tag(Font.Design.default)
+                        Text("Rounded").tag(Font.Design.rounded)
+                        Text("Monospaced").tag(Font.Design.monospaced)
+                        Text("Serif").tag(Font.Design.serif)
                     }
                     .pickerStyle(.menu)
                 }

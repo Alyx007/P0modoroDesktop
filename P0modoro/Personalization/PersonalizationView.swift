@@ -13,7 +13,7 @@ struct PersonalizationView: View {
     
     var body: some View {
         Button(action: {
-            openWindow(id: "personalizaiton")
+            openWindow(id: "settings-window")
         }) {
             HStack {
                 Text("Personalization View")

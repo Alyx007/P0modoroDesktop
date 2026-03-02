@@ -9,14 +9,107 @@ import Foundation
 import Combine
 import SwiftUI
 
+enum TimerPhase {
+    case idle, work, breaking, paused
+}
 
-class PomodoroTimer: ObservableObject { // observableObject is a protoccol that makes SwiftUI observe this class for changes
-    
+class PomodoroTimer: ObservableObject {
+
     @Published var workTime: Float = 25.0
     @Published var breakTime: Float = 10.0
-    
+
     // PERSONALIZATION
     @Published var accentColor: Color = .orange
     @Published var backgroundImage: String = "tom"
     @Published var selectedFont: Font.Design = .rounded
+
+    // TIMER STATE
+    @Published var phase: TimerPhase = .idle
+    @Published var secondsRemaining: Int = 0
+    @Published var completedPomodoros: Int = 0
+
+    private var tickCancellable: AnyCancellable?
+    private var wasWorkPhase = false // tracks what phase was active before pause
+
+    // MARK: - Computed properties
+
+    var totalSeconds: Int {
+        switch phase {
+        case .idle:
+            return Int(workTime) * 60
+        case .work:
+            return Int(workTime) * 60
+        case .breaking:
+            return Int(breakTime) * 60
+        case .paused:
+            return wasWorkPhase ? Int(workTime) * 60 : Int(breakTime) * 60
+        }
+    }
+
+    var progress: Double {
+        guard totalSeconds > 0 else { return 0 }
+        return 1.0 - Double(secondsRemaining) / Double(totalSeconds)
+    }
+
+    var displayTime: String {
+        let minutes = secondsRemaining / 60
+        let seconds = secondsRemaining % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+
+    // MARK: - Controls
+
+    func start() {
+        phase = .work
+        secondsRemaining = Int(workTime) * 60
+        wasWorkPhase = true
+        startTicking()
+    }
+
+    func pause() {
+        wasWorkPhase = (phase == .work)
+        phase = .paused
+        tickCancellable?.cancel()
+    }
+
+    func resume() {
+        phase = wasWorkPhase ? .work : .breaking
+        startTicking()
+    }
+
+    func reset() {
+        phase = .idle
+        secondsRemaining = 0
+        tickCancellable?.cancel()
+    }
+
+    // MARK: - Internal
+
+    private func startTicking() {
+        tickCancellable?.cancel()
+        tickCancellable = Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+            .sink { [weak self] _ in
+                self?.tick()
+            }
+    }
+
+    private func tick() {
+        guard secondsRemaining > 0 else { return }
+        secondsRemaining -= 1
+
+        if secondsRemaining == 0 {
+            tickCancellable?.cancel()
+            if phase == .work {
+                completedPomodoros += 1
+                phase = .breaking
+                secondsRemaining = Int(breakTime) * 60
+                startTicking()
+            } else if phase == .breaking {
+                phase = .work
+                secondsRemaining = Int(workTime) * 60
+                startTicking()
+            }
+        }
+    }
 }
