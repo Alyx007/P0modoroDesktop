@@ -13,6 +13,12 @@ enum TimerPhase {
     case idle, work, breaking, paused
 }
 
+struct ChecklistItem: Identifiable {
+    let id = UUID()
+    var title: String
+    var isDone: Bool = false
+}
+
 class PomodoroTimer: ObservableObject {
 
     @Published var workTime: Float = 25.0
@@ -23,6 +29,9 @@ class PomodoroTimer: ObservableObject {
     @Published var backgroundImage: String = "tom"
     @Published var selectedFont: Font.Design = .rounded
 
+    // CHECKLIST
+    @Published var tasks: [ChecklistItem] = []
+
     // TIMER STATE
     @Published var phase: TimerPhase = .idle
     @Published var secondsRemaining: Int = 0
@@ -30,6 +39,22 @@ class PomodoroTimer: ObservableObject {
 
     private var tickCancellable: AnyCancellable?
     private var wasWorkPhase = false // tracks what phase was active before pause
+
+    // MARK: - Checklist
+
+    func addTask(_ title: String) {
+        tasks.append(ChecklistItem(title: title))
+    }
+
+    func toggleTask(id: UUID) {
+        if let index = tasks.firstIndex(where: { $0.id == id }) {
+            tasks[index].isDone.toggle()
+        }
+    }
+
+    func removeTask(id: UUID) {
+        tasks.removeAll { $0.id == id }
+    }
 
     // MARK: - Computed properties
 
