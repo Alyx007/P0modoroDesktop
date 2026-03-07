@@ -2,6 +2,8 @@
 //  ContentView.swift
 //  P0modoro
 //
+//  Created by Aleksandra Stupiec on 19/11/25.
+//
 
 import SwiftUI
 
@@ -15,6 +17,7 @@ struct ContentView: View {
             HStack {
                 Text("PomidorTime")
                     .font(.system(.title2, design: .serif, weight: .regular))
+                    .foregroundStyle(.black)
 
                 Spacer()
 
@@ -23,6 +26,7 @@ struct ContentView: View {
                 } label: {
                     Image(systemName: "gearshape")
                         .font(.system(size: 16))
+                        .foregroundStyle(.black)
                 }
                 .buttonStyle(.plain)
                 .popover(isPresented: $showSettings) {

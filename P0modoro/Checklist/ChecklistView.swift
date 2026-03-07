@@ -21,11 +21,11 @@ struct ChecklistView: View {
             // Add row
             HStack(spacing: 8) {
                 Button(action: addTask) {
-                    Image(systemName: "plus.circle")
-                        .font(.system(size: 16))
+                    AddButtonShape()
+                        .stroke(Color.black, style: StrokeStyle(lineWidth: 1.5, lineCap: .round))
+                        .frame(width: 24, height: 21)
                 }
                 .buttonStyle(.plain)
-                .foregroundColor(.black)
 
                 TextField("Add a task…", text: $newTaskTitle)
                     .frame(maxWidth: .infinity)
