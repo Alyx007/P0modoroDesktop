@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import Combine
 
 // MARK: - Button Styles
 
@@ -34,6 +35,7 @@ struct TomatoOutlinedButtonStyle: ButtonStyle {
 
 struct TomatoView: View {
     @EnvironmentObject var timer: PomodoroTimer
+    @State private var showShape1 = true
 
     var timerDisplay: String {
         if timer.phase == .idle {
@@ -70,15 +72,32 @@ struct TomatoView: View {
     }
 
     var body: some View {
-        VStack(spacing: 12) {
-            Text(timerDisplay)
-                .font(.system(size: 56, weight: .medium, design: .monospaced))
-                .monospacedDigit()
-                .foregroundColor(.black)
+        VStack(spacing: 20) {
+            ZStack {
+                TomatoShape1()
+                    .stroke(Color.black, style: StrokeStyle(lineWidth: 1.5, lineCap: .round))
+                    .opacity(showShape1 ? 1 : 0)
 
-            Text(phaseLabel)
-                .font(.system(size: 13))
-                .foregroundColor(.secondary)
+                TomatoShape2()
+                    .stroke(Color.black, style: StrokeStyle(lineWidth: 1.5, lineCap: .round))
+                    .opacity(showShape1 ? 0 : 1)
+
+                VStack(spacing: 4) {
+                    Text(timerDisplay)
+                        .font(.system(size: 48, weight: .medium, design: .monospaced))
+                        .monospacedDigit()
+                        .foregroundColor(.black)
+
+                    Text(phaseLabel)
+                        .font(.system(size: 13))
+                        .foregroundColor(.secondary)
+                }
+                .offset(y: 50)
+            }
+            .frame(width: 240, height: 220)
+            .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+                showShape1.toggle()
+            }
 
             HStack(spacing: 12) {
                 Button(primaryButtonTitle, action: primaryAction)
