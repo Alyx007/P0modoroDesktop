@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import AppKit
 
 enum TimerPhase {
     case idle, work, breaking, paused
@@ -49,6 +50,9 @@ class PomodoroTimer: ObservableObject {
     func toggleTask(id: UUID) {
         if let index = tasks.firstIndex(where: { $0.id == id }) {
             tasks[index].isDone.toggle()
+        }
+        if !tasks.isEmpty && tasks.allSatisfy({ $0.isDone }) {
+            playSound("Purr")
         }
     }
 
@@ -119,6 +123,10 @@ class PomodoroTimer: ObservableObject {
             }
     }
 
+    private func playSound(_ name: String) {
+        NSSound(named: NSSound.Name(name))?.play()
+    }
+
     private func tick() {
         guard secondsRemaining > 0 else { return }
         secondsRemaining -= 1
@@ -129,10 +137,12 @@ class PomodoroTimer: ObservableObject {
                 completedPomodoros += 1
                 phase = .breaking
                 secondsRemaining = Int(breakTime) * 60
+                playSound("Glass")
                 startTicking()
             } else if phase == .breaking {
                 phase = .work
                 secondsRemaining = Int(workTime) * 60
+                playSound("Ping")
                 startTicking()
             }
         }
