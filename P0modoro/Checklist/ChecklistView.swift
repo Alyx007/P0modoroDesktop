@@ -24,6 +24,7 @@ struct ChecklistView: View {
                     AddButtonShape()
                         .stroke(Color.black, style: StrokeStyle(lineWidth: 1.5, lineCap: .round))
                         .frame(width: 24, height: 21)
+                        .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
 
