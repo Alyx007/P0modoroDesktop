@@ -17,5 +17,7 @@ struct P0modoroApp: App {
             ContentView()
                 .environmentObject(timer)
         }
+        .defaultSize(width: 700, height: 460)
+        .windowResizability(.contentSize)
     }
 }

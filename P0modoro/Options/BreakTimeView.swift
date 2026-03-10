@@ -8,34 +8,23 @@
 import SwiftUI
 
 struct BreakTimeView: View {
-    
+
     @EnvironmentObject var timer: PomodoroTimer
 
     var body: some View {
-        GroupBox {
-            VStack(alignment: .leading) {
-                Text("Set your break time")
-                    .padding()
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
-                Text("Your break time: \(Int(timer.breakTime))")
-                    .padding(.horizontal)
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
-                Slider(value: $timer.breakTime,
-                       in: 5...45,
-                       step: 5)
-                {
-                    Text("Break time")
-                } minimumValueLabel: {
-                    Text("5")
-                        .font(.callout)
-                } maximumValueLabel: {
-                    Text("45")
-                        .font(.callout)
-
-                }
-                .padding()
-
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("Break")
+                    .font(.system(.body, design: .serif))
+                    .foregroundColor(.primary)
+                Spacer()
+                Text("\(Int(timer.breakTime)) min")
+                    .font(.system(.body, design: .monospaced))
+                    .foregroundColor(.secondary)
             }
+
+            Slider(value: $timer.breakTime, in: 5...45, step: 5)
+                .tint(.black)
         }
         .disabled(timer.phase != .idle)
         .opacity(timer.phase != .idle ? 0.5 : 1.0)
@@ -45,4 +34,6 @@ struct BreakTimeView: View {
 #Preview {
     BreakTimeView()
         .environmentObject(PomodoroTimer())
+        .padding()
+        .frame(width: 300)
 }
