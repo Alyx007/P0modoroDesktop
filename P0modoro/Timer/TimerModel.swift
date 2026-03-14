@@ -44,7 +44,8 @@ class PomodoroTimer: ObservableObject {
     // MARK: - Checklist
 
     func addTask(_ title: String) {
-        tasks.append(ChecklistItem(title: title))
+        let trimmed = String(title.prefix(500))
+        tasks.append(ChecklistItem(title: trimmed))
     }
 
     func toggleTask(id: UUID) {

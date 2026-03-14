@@ -12,6 +12,10 @@ struct P0modoroApp: App {
 
     @StateObject var timer = PomodoroTimer()
 
+    private var isTimerActive: Bool {
+        timer.phase != .idle
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -19,5 +23,16 @@ struct P0modoroApp: App {
         }
         .defaultSize(width: 700, height: 460)
         .windowResizability(.contentSize)
+
+        MenuBarExtra(isInserted: Binding(
+            get: { isTimerActive },
+            set: { _ in }
+        )) {
+            MenuBarView()
+                .environmentObject(timer)
+        } label: {
+            Label(timer.displayTime, systemImage: "clock")
+        }
+        .menuBarExtraStyle(.window)
     }
 }
